@@ -1,0 +1,4 @@
+*.swp
+dist
+deb_dist
+yq.egg-info
