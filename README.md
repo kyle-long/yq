@@ -29,3 +29,9 @@ Test .rpm
 cd dist
 rpm -ivh yq<version>.noarch.rpm
 ```
+
+Install with pip (why not?)
+---------------------------
+```
+pip install git+git://github.com/kyle-long/yq.git@master
+```
