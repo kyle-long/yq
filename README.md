@@ -35,3 +35,19 @@ Install with pip (why not?)
 ```
 pip install git+git://github.com/kyle-long/yq.git@master
 ```
+
+Usage
+-----
+
+Should be the same as jq.  Here are some examples.
+
+```
+# pretty print as json
+cat test.yaml | yq -r .
+
+# pretty print as json again
+yq -r . test.yaml
+
+# select just the property `blah`
+ya -r .blah test.yaml
+```
