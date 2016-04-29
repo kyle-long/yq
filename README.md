@@ -51,3 +51,8 @@ yq -r . test.yaml
 # select just the property `blah`
 ya -r .blah test.yaml
 ```
+
+This will output YAML.  If you'd like JSON returned you can provide the `-j` or `--json` options.
+```
+yq -j -r . test.yaml
+```
