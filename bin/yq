@@ -21,22 +21,39 @@ elif len(sys.argv) > 1:
 
     sys.argv = sys.argv[:-1]
 
+output_json = False
+
+if "-j" in sys.argv:
+    sys.argv.remove("-j")
+    output_json = True
+elif "--json" in sys.argv:
+    sys.argv.remove("--json")
+    output_json = True
+
 if content:
     content = yaml.load(content)
     content = json.dumps(content)
 
 args = ["jq"]
 args = args + sys.argv[1:]
-process = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
+kwargs = {
+    "stdin": subprocess.PIPE
+}
+
+if not output_json:
+    kwargs["stdout"] = subprocess.PIPE
+
+process = subprocess.Popen(args, **kwargs)
 stdout, stderr = process.communicate(content)
 
-content = yaml.load(stdout)
-if isinstance(content, (dict, list)):
-    content = yaml.safe_dump(
-        content,
-        encoding="utf-8",
-        indent=4,
-        default_flow_style=False
-    )
-
-print content
+if stdout:
+    content = yaml.load(stdout)
+    if isinstance(content, (dict, list)):
+        content = yaml.safe_dump(
+            content,
+            encoding="utf-8",
+            indent=4,
+            default_flow_style=False
+        )
+    print content
