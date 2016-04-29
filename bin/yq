@@ -27,5 +27,16 @@ if content:
 
 args = ["jq"]
 args = args + sys.argv[1:]
-process = subprocess.Popen(args, stdin=subprocess.PIPE)
-process.communicate(content)
+process = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+stdout, stderr = process.communicate(content)
+
+content = yaml.load(stdout)
+if isinstance(content, (dict, list)):
+    content = yaml.safe_dump(
+        content,
+        encoding="utf-8",
+        indent=4,
+        default_flow_style=False
+    )
+
+print content
