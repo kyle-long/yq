@@ -11,7 +11,8 @@ config = {
     "author_email": "uilwen@gmail.com",
     "version": "1",
     "install_requires": [
-        "PyYAML"
+        "PyYAML",
+        "docopt"
     ],
     "scripts": [
         "bin/yq",
