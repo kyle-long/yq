@@ -39,7 +39,7 @@ cat test.yaml | yq -r .
 yq -r . test.yaml
 
 # select just the property `blah`
-ya -r .blah test.yaml
+yq -r .blah test.yaml
 ```
 
 This will output YAML.  If you'd like JSON returned you can provide the `-j` or `--json` options.
