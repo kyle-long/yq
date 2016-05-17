@@ -7,15 +7,18 @@ Note: These packages do not force you to have jq (at least not yet)
 
 Bigger Note: So far this is just a hacky script.  Expect issues.
 
+[//]: # (
+TODO: These instructions are broken.
 Build .deb
-----------
+---------
 
 ```
 pip install -r requirements.txt
 python setup.py --command-packages=stdeb.command sdist_dsc
-cd deb_dist/ya-<version>
+cd deb_dist/yq-<version>
 dpkg-buildpackage
 ```
+)
 
 Build .rpm
 ----------
@@ -42,10 +45,10 @@ Usage
 Should be the same as jq.  Here are some examples.
 
 ```
-# pretty print as json
+# pretty print as yaml
 cat test.yaml | yq -r .
 
-# pretty print as json again
+# pretty print as yaml again
 yq -r . test.yaml
 
 # select just the property `blah`
