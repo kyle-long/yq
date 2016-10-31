@@ -45,10 +45,18 @@ if not output_json:
     kwargs["stdout"] = subprocess.PIPE
 
 process = subprocess.Popen(args, **kwargs)
-stdout, stderr = process.communicate(content)
+content, stderr = process.communicate(content)
 
-if stdout:
-    content = yaml.load(stdout)
+if content:
+    # Issue #1. There are cases jq will not return valid json
+    # for instance, "jq -r .[]" which would return newline
+    # separated values. In this case it will not decode to yaml,
+    # so I just dump out the result.
+    try:
+        content = yaml.load(stdout)
+    except Exception:
+        pass
+
     if isinstance(content, (dict, list)):
         content = yaml.safe_dump(
             content,
